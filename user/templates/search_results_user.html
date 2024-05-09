@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* Light gray background */
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto; /* Center the container */
+            padding: 20px;
+            background-color: #fff; /* White container background */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #007bff; /* Blue border bottom */
+            padding-bottom: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #f0f0f0; /* Light gray item background */
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        li:hover {
+            background-color: #eaeaea; /* Darker gray on hover */
+        }
+
+        strong {
+            font-weight: bold;
+        }
+
+        a {
+            color: #007bff; /* Blue link color */
+            text-decoration: none;
+            transition: color 0.3s ease;
+            margin-right: 10px;
+        }
+
+        a:hover {
+            color: #0056b3; /* Darker blue on hover */
+        }
+
+        p {
+            color: #777;
+            font-style: italic;
+        }
+
+        .back-button {
+            background-color: white;
+            color: black;
+            border: 2px solid #007bff; /* Blue border */
+            border-radius: 5px;
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Added border-color transition */
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #007bff;
+            color: white;
+            border-color: #0056b3; /* Darker blue border on hover */
+        }
+
+        .book-image {
+            max-width: 100px; /* Adjust image size as needed */
+            margin-right: 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Search Results for "{{ query }}"</h2>
+        {% if search_results %}
+            <ul>
+                {% for item in search_results %}
+                    <li>
+                        {% if item.item_type|lower == 'home' %}
+                            {% if item.images %}
+                                <img src="{{ item.images.url }}" alt="{{ item.title }}" class="book-image">
+                            {% endif %}
+                            <strong>Title:</strong> {{ item.title }}<br>
+                            <strong>Author:</strong> {{ item.author }}<br>
+                        {% elif item.item_type|lower == 'ebook_user' %}
+                            <strong>Title:</strong> {{ item.title }}<br>
+                            <strong>Author:</strong> {{ item.author }}<br>
+                        {% elif item.item_type|lower == 'accessories_user' %}
+                            <strong>Title:</strong> {{ item.title }}<br>
+                        {% endif %}
+
+                        {% if item.item_type|lower == 'home' %}
+                            <a href="{% url 'book_details_user' item.id %}" class="view-details-link">View Details</a>
+                        {% elif item.item_type|lower == 'ebook_user' %}
+                            <a href="{% url 'ebook_details_user' item.id %}" class="view-details-link">View Details</a>
+                        {% elif item.item_type|lower == 'accessories_user' %}
+                            <a href="{% url 'accessories_details_user' item.id %}" class="view-details-link">View Details</a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No results found for "{{ query }}"</p>
+        {% endif %}
+        <a href="http://127.0.0.1:8000/home/" class="back-button">Back to Main Page</a>
+    </div>
+</body>
+</html>

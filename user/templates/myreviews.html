@@ -1,0 +1,55 @@
+{% extends 'main_user.html' %}
+{% block content %}
+
+    <div class="container">
+        <h1 class="text-center mb-4">My Reviews</h1>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Products</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Per Unit Price</th>
+                        <th scope="col">My Review</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in review_ins %}
+                    <tr>
+                    {% if p.Book %}
+                        <td>{{ p.Book.title }}</td>
+                        {% elif p.acc %}
+                        <td>{{ p.acc.title }}</td>
+                    {% endif %}
+
+                    {% if p.Book %}
+                        <td>Book</td>
+                        {% elif p.acc %}
+                        <td>Accessories</td>
+                    {% endif %}
+
+                    {% if p.Book %}
+                        <td>{{ p.Book.price }}</td>
+                        {% elif p.acc %}
+                        <td>{{ p.acc.price }}</td>
+                        {% endif %}
+                        <td>{{ p.review_choice }}</td>
+                        <td>
+                            {% if p.Book %}
+                            <a href="{% url 'book_details_user' p.Book.id %}" class="btn btn-success mr-2">See Details</a>
+                            {% elif p.acc %}
+                            <a href="{% url 'accessories_details_user' p.acc.id %}" class="btn btn-success mr-2">See Details</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center mt-4">
+            <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+        </div>
+    </div>
+
+{% endblock %}

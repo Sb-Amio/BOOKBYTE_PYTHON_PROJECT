@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        /* Custom styles */
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 30px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-label {
+            font-weight: bold;
+            margin-bottom: 5px; /* Add some spacing below the label */
+            display: block; /* Make the label a block element */
+        }
+        .form-control {
+            border-radius: 20px; /* Add some border radius to input fields */
+        }
+        .btn-signup {
+            width: 100%;
+            border-radius: 20px; /* Add some border radius to button */
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>User Registration</h2>
+        <form method="post" >
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_title" class="form-label">Name</label>
+                {{ form.username }}
+            </div>
+            <div class="form-group">
+                <label for="id_title" class="form-label">Email</label>
+                {{ form.email}}
+            </div>
+            <div class="form-group">
+                <label for="id_title" class="form-label">Password</label>
+                {{ form.password1 }}
+            </div>
+            <div class="form-group">
+                <label for="id_title" class="form-label">Confirm Password</label>
+                {{ form.password2 }}
+            </div>
+            <button type="submit" class="btn btn-primary btn-signup">Sign Up</button>
+        </form>
+        <div class="login-link">
+            <h6>Already have an account?</h6> <a href="{% url 'login_user' %}" class="btn btn-outline-primary">Login</a>
+            
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

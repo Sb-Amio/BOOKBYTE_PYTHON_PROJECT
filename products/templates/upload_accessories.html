@@ -1,0 +1,83 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .form-container {
+        margin-top: 50px;
+        text-align: center;
+    }
+    .form-card {
+        display: inline-block;
+        padding: 20px;
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        width: 500px; /* Adjust width as needed */
+    }
+    .form-card h2 {
+        margin-bottom: 20px;
+    }
+    .form-group {
+        margin-bottom: 30px; /* Increased spacing between form groups */
+        text-align: left;
+    }
+    .form-label {
+        font-weight: bold;
+        display: block; /* Ensure labels are displayed as block elements */
+        margin-bottom: 5px; /* Add spacing between label and input */
+    }
+    .form-control {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px; /* Adjust font size for better readability */
+    }
+    .btn-submit {
+        width: 200px;
+        height: 40px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        font-size: 16px; /* Adjust font size for consistency */
+    }
+    .btn-submit:hover {
+        background-color: #0056b3;
+    }
+</style>
+<div class="form-container" style="margin-bottom: 20px">
+    <form action="" method="POST" enctype="multipart/form-data" class="form-card">
+        {% csrf_token %}
+        <h2>Accessories Information</h2>
+        <div class="form-group">
+            <label for="id_title" class="form-label">Title</label>
+            {{ form.title }}
+        </div>
+        <div class="form-group">
+            <label for="id_description" class="form-label">Description</label>
+            {{ form.description }}
+        </div>
+        <div class="form-group">
+            <label for="id_price" class="form-label">Price</label>
+            {{ form.price }}
+        </div>
+        <div class="form-group">
+            <label for="id_quantity" class="form-label">Quantity</label>
+            {{ form.quantity }}
+        </div>
+        <div class="form-group">
+            <label for="id_image" class="form-label">Image</label>
+            {{ form.image }}
+        </div>
+        <input class="btn-submit" type="submit" name="Submit" value="Upload">
+        <div class="text-center" style="margin-top: 30px;">
+            <a href="http://127.0.0.1:8000/accessories/" class="btn btn-outline-dark btn-sm mr-2" style="height: 50px; width: 80px; align-content: center">Back</a>
+            <!--<button type="button" class="btn btn-outline-dark btn-sm">Order Now</button>-->
+        </div>
+    </form>
+</div>
+{% endblock %}

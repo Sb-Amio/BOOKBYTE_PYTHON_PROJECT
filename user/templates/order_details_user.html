@@ -1,0 +1,71 @@
+{% extends 'main_user.html' %}
+{% block content %}
+<div class="container">
+    <h1 class="text-center mb-4">My Orders</h1>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Order Placed</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Unit Price</th>
+                    <th scope="col">Total Price</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in order_ins %}
+                <tr>
+                    <td>{{ order.date_time }}</td>
+                    <td>
+                        {% if order.book %}
+                        {{ order.book.title }}
+                        {% elif order.ebook %}
+                        {{ order.ebook.title }}
+                        {% elif order.accessories %}
+                        {{ order.accessories.title }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if order.book %}
+                        Book
+                        {% elif order.ebook %}
+                        E-Book
+                        {% elif order.accessories %}
+                        Accessories
+                        {% endif %}
+                    </td>
+                    <td>{{ order.quantity }}</td>
+                    <td>
+                        {% if order.book %}
+                        {{ order.book.price }}
+                        {% elif order.ebook %}
+                        {{ order.ebook.price }}
+                        {% elif order.accessories %}
+                        {{ order.accessories.price }}
+                        {% endif %}
+                    </td>
+                    <td>{{ order.price }}</td>
+                    <td>
+                        {% if order.book %}
+                        <a href="{% url 'book_details_user' order.book.id %}" class="btn btn-sm btn-success">Details</a>
+                        <a href="{% url 'giveReview_Book' order.book.id %}" class="btn btn-sm btn-info mr-2" style="margin-bottom: auto">Give Review</a>
+                        {% elif order.ebook %}
+                        <a href="{% url 'ebook_details_user' order.ebook.id %}" class="btn btn-sm btn-success">Details</a>
+                        {% elif order.accessories %}
+                        <a href="{% url 'accessories_details_user' order.accessories.id %}" class="btn btn-sm btn-success">Details</a>
+                        <a href="{% url 'giveReview_Accessories' order.accessories.id %}" class="btn btn-sm btn-info mr-2" style="margin-bottom: auto">Give Review</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center mt-4">
+        <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+    </div>
+</div>
+{% endblock %}

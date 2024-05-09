@@ -1,0 +1,32 @@
+{% extends 'main_user.html' %}
+{% block content %}
+<div class="container" style="margin-top: 20px">
+    <div class="row">
+        {% for p in accessories_ins %}
+        <div class="col-md-3 mb-4">
+            <div class="card h-100">
+                <img src="{{ p.image.url }}" class="card-img-top" style="height: 200px; object-fit: cover;" alt="...">
+                <div class="card-body">
+                    <h6 class="card-title">{{ p.title }}</h6>
+                    <p class="card-text" style=" overflow: hidden;"></p>
+                    <p class="card-text" style=" overflow: hidden;">Price: {{ p.price }}</p>
+                    {% if p.quantity == 0 %}
+                       <p class="card-text" style="overflow: hidden; font-weight: bold; color: red;">Stock Out!</p>
+                    {% endif %}
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group" role="group" aria-label="Book Actions">
+                     <a href="{% url 'accessories_details_user' p.id %}" class="btn btn-outline-info btn-sm">Details</a>
+                        {% if p.quantity != 0 %}
+                     <a href="{% url 'create_order_accessories' p.id %}" class="btn btn-outline-success">Order Now</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}

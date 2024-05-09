@@ -1,0 +1,57 @@
+<form method="POST" class="custom-form">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="id_review_choice">Review:</label>
+        {{ form.review_choice }}
+        {% if form.review_choice.errors %}
+            <div class="error">{{ form.review_choice.errors }}</div>
+        {% endif %}
+    </div>
+    <button type="submit" class="btn btn-primary"style="margin-bottom: 50px">Submit</button>
+   <a href="{% url 'order_details_user' %}" class="btn btn-success back-btn" style=" align-content: center; margin-left: 180px" >Back</a>
+
+</form>
+<style>
+    .custom-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+        margin-top: 200px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.error {
+    color: red;
+    margin-top: 5px;
+}
+
+
+</style>

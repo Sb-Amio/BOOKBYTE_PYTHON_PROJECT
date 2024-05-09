@@ -1,0 +1,29 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+    <div class="card" style="width: 18rem; margin-left: auto; margin-right: auto; margin-top: auto">
+    {% if products.image %}
+  <img src="{{ products.image.url }}" style="width: auto" class="card-img-top" alt="...">
+     {% endif %}   
+  <div class="card-body">
+    <h5 class="card-title">{{ products.title }}</h5>
+    <p class="card-text">{{ products.description }}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Book Author: {{ products.author }}</li>
+    <li class="list-group-item">Book Publishers: {{ products.publisher }}</li>
+    <li class="list-group-item">Book Price: {{ products.price }}</li>
+      <li class="list-group-item">Book Review: {{ products.review_choice }}</li>
+      <li class="list-group-item">
+         {% if products.quantity == 0 %}
+            <p class="card-text" style="overflow: hidden; font-weight: bold; color: red;">Stock Out!</p>
+         {% endif %}
+      </li>
+  </ul>
+  <!--<div class="card-body">
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+      <button type="button" class="btn btn-outline-dark" style="margin-left: auto; margin-right: auto">Order Now</button>
+  </div>-->
+</div>
+{% endblock %}
